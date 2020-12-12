@@ -1,7 +1,5 @@
 
 class AttrDict:
-    __getattr__ = dict.__getitem__
-
     def __init__(self, data: dict):
         for key in list(data.keys()):
             if type(data[key]) == dict:
@@ -25,3 +23,9 @@ class AttrDict:
 
     def __setitem__(self, key, value):
         self.__dict__[key] = value
+
+    def __getattr__(self, item):
+        if item in self.__dict__.keys():
+            return self.__dict__[item]
+        else:
+            raise AttributeError(f"{item!r} is not a valid Attribute!")
