@@ -26,6 +26,8 @@ class AttrDict(dict):
             except RecursionError:
                 return "The Data in this class might be to big and because of that a RecursionError occurred"
         return "{" + recursive(self) + "}"
+    
+    __str__ = __repr__
 
     def __getitem__(self, item): return self.__dict__.__getitem__(item.replace(" ", "_"))
     def __getattr__(self, item): return self.__getitem__(item)
